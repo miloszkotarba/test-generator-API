@@ -5,6 +5,7 @@ import com.mkotarba.first_crud_api.collection.CategoryDto;
 import com.mkotarba.first_crud_api.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,11 @@ public class CategoryController {
     @ApiResponse(responseCode = "200", description = "Found category.")
     @ApiResponse(responseCode = "404", description = "Category not found.")
     @GetMapping("/{id}")
-    public HttpEntity<Category> getCategoryById(@PathVariable String id) {
+    public HttpEntity<?> getCategoryById(@PathVariable String id) {
         Category category = categoryService.findById(id);
 
         if (category == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found.");
         } else {
             return ResponseEntity.ok(category);
         }
@@ -46,7 +47,7 @@ public class CategoryController {
     @Operation(summary = "Create a new category", description = "Create a new category in the database. Returns created category.")
     @ApiResponse(responseCode = "201", description = "Category created.")
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> createCategory(@RequestBody @Valid Category category) {
         Category createdCategory = categoryService.save(category);
 
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);

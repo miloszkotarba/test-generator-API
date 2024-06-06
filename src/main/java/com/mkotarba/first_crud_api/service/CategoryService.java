@@ -14,7 +14,7 @@ public interface CategoryService {
 
     Category findById(String id);
 
-    boolean deleteById(String category);
+    boolean deleteById(String id);
 
     boolean updateById(String id, CategoryDto categoryDto);
 }

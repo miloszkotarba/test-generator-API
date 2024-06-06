@@ -31,10 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public boolean deleteById(String category) {
-        Optional<Category> optionalCategory = categoryRepository.findById(category);
+    public boolean deleteById(String id) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalCategory.isPresent()) {
-            categoryRepository.deleteById(category);
+            categoryRepository.deleteById(id);
             return true;
         } else {
             return false;
