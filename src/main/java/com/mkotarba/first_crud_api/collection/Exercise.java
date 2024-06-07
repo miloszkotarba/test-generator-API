@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -26,4 +29,8 @@ public class Exercise {
 
     @DocumentReference(collection = "category")
     private Category category;
+
+    @DocumentReference(collection = "comment")
+    private List<Comment> comments = new ArrayList<>();
+
 }
