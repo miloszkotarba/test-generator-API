@@ -1,11 +1,14 @@
 package com.mkotarba.first_crud_api.collection;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,10 @@ public class Exercise {
 
     @DocumentReference(collection = "category")
     private Category category;
+
+    @JsonFormat(pattern = "yyyy-MM-dd, HH:mm")
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     @DocumentReference(collection = "comment")
     private List<Comment> comments = new ArrayList<>();

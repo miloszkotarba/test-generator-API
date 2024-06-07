@@ -1,6 +1,5 @@
 package com.mkotarba.first_crud_api.service;
 
-import com.mkotarba.first_crud_api.collection.CategoryDto;
 import com.mkotarba.first_crud_api.collection.Comment;
 import org.springframework.stereotype.Service;
 

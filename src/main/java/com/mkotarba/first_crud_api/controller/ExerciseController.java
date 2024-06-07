@@ -23,7 +23,6 @@ public class ExerciseController {
     @Autowired
     private ExerciseService exerciseService;
 
-
     @Operation(summary = "Create a new exercise", description = "Create a new exercise in the database. Returns the id of the created exercise.")
     @PostMapping
     public String save(@RequestBody @Valid Exercise exercise) {
