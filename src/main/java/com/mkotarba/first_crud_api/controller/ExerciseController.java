@@ -2,9 +2,9 @@ package com.mkotarba.first_crud_api.controller;
 
 import com.mkotarba.first_crud_api.collection.Comment;
 import com.mkotarba.first_crud_api.collection.Exercise;
-import com.mkotarba.first_crud_api.service.CommentService;
 import com.mkotarba.first_crud_api.service.ExerciseService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +37,20 @@ public class ExerciseController {
         return ResponseEntity.ok(exercises);
     }
 
+    @Operation(summary = "Get exercise by id", description = "Get exercise by id.")
+    @ApiResponse(responseCode = "200", description = "Exercise found.")
+    @ApiResponse(responseCode = "404", description = "Exercise not found.")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getExerciseById(@PathVariable String id) {
+        Optional<Exercise> exercise = exerciseService.findById(id);
+
+        if (exercise.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exercise not found.");
+        } else {
+            return ResponseEntity.ok(exercise);
+        }
+    }
+
     @Operation(summary = "Add comment to exercise", description = "Add comment to exercise.")
     @PostMapping("/{id}/comment")
     public ResponseEntity<?> addComment(@PathVariable String id, @RequestBody @Validated Comment comment) {
@@ -47,6 +61,7 @@ public class ExerciseController {
         }
         return ResponseEntity.ok(updatedExercise);
     }
+
 
     @Operation(summary = "Delete exercise", description = "Delete exercise from the database and all comments associated with it.")
     @DeleteMapping("/{id}")
