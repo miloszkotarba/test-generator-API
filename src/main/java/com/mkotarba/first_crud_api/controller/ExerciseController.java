@@ -62,6 +62,18 @@ public class ExerciseController {
         return ResponseEntity.ok(updatedExercise);
     }
 
+    @Operation(summary = "Update exercise", description = "Update exercise in the database.")
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateExercise(@PathVariable String id, @RequestBody @Valid Exercise exercise) {
+        Optional<Exercise> updatedExercise = exerciseService.updateExercise(id, exercise);
+
+        if (updatedExercise.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exercise not found.");
+        } else {
+            return ResponseEntity.ok(updatedExercise);
+        }
+    }
+
 
     @Operation(summary = "Delete exercise", description = "Delete exercise from the database and all comments associated with it.")
     @DeleteMapping("/{id}")

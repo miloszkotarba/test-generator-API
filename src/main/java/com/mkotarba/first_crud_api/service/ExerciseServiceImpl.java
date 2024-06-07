@@ -54,6 +54,19 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
+    public Optional<Exercise> updateExercise(String id, Exercise exercise) {
+        return exerciseRepository.findById(id)
+                .map(exerciseToUpdate -> {
+                    exerciseToUpdate.setContent(exercise.getContent());
+                    exerciseToUpdate.setSolution(exercise.getSolution());
+                    exerciseToUpdate.setDifficultyLevel(exercise.getDifficultyLevel());
+                    exerciseToUpdate.setCategory(exercise.getCategory());
+                    return Optional.of(exerciseRepository.save(exerciseToUpdate));
+                })
+                .orElse(Optional.empty());
+    }
+
+    @Override
     public String save(Exercise exercise) {
         return exerciseRepository.save(exercise).getExerciseId();
     }

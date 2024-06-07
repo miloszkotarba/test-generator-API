@@ -18,4 +18,6 @@ public interface ExerciseService {
     Exercise addCommentToExercise(String id, Comment comment);
 
     boolean deleteById(String id);
+
+    Optional<Exercise> updateExercise(String id, Exercise exercise);
 }
