@@ -39,5 +39,4 @@ public class Exercise {
 
     @DocumentReference(collection = "comment")
     private List<Comment> comments = new ArrayList<>();
-
 }

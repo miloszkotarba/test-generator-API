@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public interface ExerciseService {
-    String save(Exercise exercise);
+    Exercise save(Exercise exercise);
 
     List<Exercise> findAll();
 

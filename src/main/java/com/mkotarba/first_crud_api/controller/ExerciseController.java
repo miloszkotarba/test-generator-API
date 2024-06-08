@@ -25,7 +25,7 @@ public class ExerciseController {
 
     @Operation(summary = "Create a new exercise", description = "Create a new exercise in the database. Returns the id of the created exercise.")
     @PostMapping
-    public String save(@RequestBody @Valid Exercise exercise) {
+    public Exercise save(@RequestBody @Valid Exercise exercise) {
         return exerciseService.save(exercise);
     }
 

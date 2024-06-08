@@ -67,7 +67,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public String save(Exercise exercise) {
-        return exerciseRepository.save(exercise).getExerciseId();
+    public Exercise save(Exercise exercise) {
+        return exerciseRepository.save(exercise);
     }
 }
