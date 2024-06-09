@@ -26,6 +26,13 @@ public class PDFGeneratorService {
         title.setAlignment(Element.ALIGN_CENTER);
         document.add(title);
 
+        if (test.getDuration() != 0) {
+            Paragraph duration = new Paragraph("(Czas trwania: " + test.getDuration() + " min.)", addintialInfoFont);
+            duration.setAlignment(Element.ALIGN_CENTER);
+            document.add(duration);
+
+        }
+
         document.add(Chunk.NEWLINE);
 
         Font exerciseNoFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, "Cp1250", 13);

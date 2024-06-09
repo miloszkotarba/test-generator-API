@@ -141,7 +141,7 @@ public class TestController {
             String currentDateTime = dateFormatter.format(new Date());
 
             String headerKey = "Content-Disposition";
-            String headerValue = "attachment; filename=tests_" + currentDateTime + ".pdf";
+            String headerValue = "attachment; filename=test_" + currentDateTime + ".pdf";
             response.setHeader(headerKey, headerValue);
 
             pdfGeneratorService.export(response, test);
