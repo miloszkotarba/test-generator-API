@@ -50,6 +50,21 @@ public class ExerciseController {
         }
     }
 
+    @Operation(summary = "Get all comments for exercise", description = "Get all comments for exercise.")
+    @GetMapping("/{id}/comment")
+    @ApiResponse(responseCode = "200", description = "Comments found.")
+    @ApiResponse(responseCode = "404", description = "Exercise not found.")
+    public ResponseEntity<?> getCommentsForExercise(@PathVariable String id) {
+        Optional<Exercise> exercise = exerciseService.findById(id);
+
+        if (exercise.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Exercise not found.");
+        } else {
+            return ResponseEntity.ok(exercise.get().getComments());
+        }
+    }
+
+
     @Operation(summary = "Add comment to exercise", description = "Add comment to exercise.")
     @PostMapping("/{id}/comment")
     public ResponseEntity<?> addComment(@PathVariable String id, @RequestBody @Validated Comment comment) {
